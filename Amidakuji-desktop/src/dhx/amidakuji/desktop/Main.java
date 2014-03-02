@@ -31,7 +31,7 @@ import dhx.amidakuji.ui.AmidakujiMain;
 /**
  * 
  * @author Benjamin Lšsch
- * @version 0.4.2
+ * @version 0.4
  * 
  */
 
@@ -42,7 +42,7 @@ public class Main {
 		AmidakujiMain.height = 720;
 		
 		LwjglApplicationConfiguration cfg = new LwjglApplicationConfiguration();
-		cfg.title = "Amidakuji Version 0.4.2";
+		cfg.title = "Amidakuji Version 0.4.3";
 		cfg.useGL20 = true;
 		cfg.width = AmidakujiMain.width;
 		cfg.height = AmidakujiMain.height;
