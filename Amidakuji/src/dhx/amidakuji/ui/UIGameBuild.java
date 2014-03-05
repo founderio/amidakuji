@@ -12,7 +12,7 @@ import com.badlogic.gdx.math.Rectangle;
 import dhx.amidakuji.gamelogic.AmidakujiDesign;
 
 /**
- * Copyright 2014 Benjamin Lšsch
+ * Copyright 2014 Benjamin LÃ¶sch
  * 
  * This file is part of Amidakuji.
 
@@ -32,7 +32,7 @@ import dhx.amidakuji.gamelogic.AmidakujiDesign;
 
 /**
  * 
- * @author Benjamin Lšsch
+ * @author Benjamin LÃ¶sch
  * @version 0.4
  * 
  */
@@ -128,7 +128,7 @@ public class UIGameBuild implements Screen {
 					return false;
 				}
 				
-				screenY = AmidakujiMain.height - screenY;	// has to be converted, because of different y origins
+				screenY = Gdx.graphics.getHeight() - screenY;	// has to be converted, because of different y origins
 				
 				Rectangle rec = new Rectangle(sbX, sbY, sbWidth, sbHeight);
 				
@@ -378,14 +378,14 @@ public class UIGameBuild implements Screen {
 		controls[2] = "H:\t HIDE CONTROLS";
 		controls[3] = "ESC:\t OPEN MENU";
 		
-		float x = AmidakujiMain.width - AmidakujiMain.bFontPressStart.getBounds("FRAMES PER SECOND: 00").width - AmidakujiMain.lineYPadding*2;
-		float y = AmidakujiMain.height - AmidakujiMain.startY;
+		float x = Gdx.graphics.getWidth() - AmidakujiMain.bFontPressStart.getBounds("FRAMES PER SECOND: 00").width - AmidakujiMain.lineYPadding*2;
+		float y = Gdx.graphics.getHeight() - AmidakujiMain.startY;
 		for (int counter = 0; counter < controls.length; counter++) {
 			AmidakujiMain.bFontPressStart.draw(batch, controls[counter], x, y);
 			y -= AmidakujiMain.bFontPressStart.getCapHeight() + AmidakujiMain.lineYPadding;
 		}
 		
-		AmidakujiMain.bFontPressStart.draw(batch, "FRAMES PER SECOND: " + Gdx.graphics.getFramesPerSecond(), AmidakujiMain.lineYPadding*2, AmidakujiMain.height - AmidakujiMain.startY);
+		AmidakujiMain.bFontPressStart.draw(batch, "FRAMES PER SECOND: " + Gdx.graphics.getFramesPerSecond(), AmidakujiMain.lineYPadding*2, Gdx.graphics.getHeight() - AmidakujiMain.startY);
 		
 //		y -= AmidakujiMain.bFontPressStart.getCapHeight() + AmidakujiMain.padding;
 //		AmidakujiMain.bFontPressStart.draw(batch, controls[controls.length - 1], x, y);
@@ -423,8 +423,8 @@ public class UIGameBuild implements Screen {
 		
 		batch.begin();
 		AmidakujiMain.bFontDpCompic.draw(batch, "AMIDAKUJI",
-				AmidakujiMain.width/2 - AmidakujiMain.bFontDpCompic.getBounds("AMIDAKUJI").width/2,
-				AmidakujiMain.height - AmidakujiMain.startY);
+				Gdx.graphics.getWidth()/2 - AmidakujiMain.bFontDpCompic.getBounds("AMIDAKUJI").width/2,
+				Gdx.graphics.getHeight() - AmidakujiMain.startY);
 		
 		this.drawAmidakuji(xOffset, 150);
 		this.drawResults(AmidakujiMain.tile.getWidth(), 120);

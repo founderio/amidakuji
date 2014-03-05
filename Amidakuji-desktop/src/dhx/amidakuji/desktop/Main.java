@@ -10,7 +10,7 @@ import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import dhx.amidakuji.ui.AmidakujiMain;
 
 /**
- * Copyright 2014 Benjamin Lšsch
+ * Copyright 2014 Benjamin LÃ¶sch
  * 
  * This file is part of Amidakuji.
 
@@ -30,7 +30,7 @@ import dhx.amidakuji.ui.AmidakujiMain;
 
 /**
  * 
- * @author Benjamin Lšsch
+ * @author Benjamin LÃ¶sch
  * @version 0.4
  * 
  */
@@ -38,14 +38,12 @@ import dhx.amidakuji.ui.AmidakujiMain;
 public class Main {
 	public static void main(String[] args) {
 		AmidakujiMain amidakuji = new AmidakujiMain();
-		AmidakujiMain.width = 1080;
-		AmidakujiMain.height = 720;
 		
 		LwjglApplicationConfiguration cfg = new LwjglApplicationConfiguration();
 		cfg.title = "Amidakuji Version 0.4.3";
-		cfg.useGL20 = true;
-		cfg.width = AmidakujiMain.width;
-		cfg.height = AmidakujiMain.height;
+		cfg.useGL20 = false;
+		cfg.width = 1080;
+		cfg.height = 720;
 		
 		
 		if(System.getProperty("os.name").toLowerCase().indexOf("mac os x") != -1) {

@@ -15,7 +15,9 @@ public class RobovmLauncher extends IOSApplication.Delegate {
 		IOSApplicationConfiguration config = new IOSApplicationConfiguration();
 		config.orientationLandscape = true;
 		config.orientationPortrait = false;
-		return new IOSApplication(new AmidakujiMain(), config);
+		AmidakujiMain amidakuji = new AmidakujiMain();
+		amidakuji.keyboardAvailable = false;
+		return new IOSApplication(amidakuji, config);
 	}
 
 	public static void main(String[] argv) {

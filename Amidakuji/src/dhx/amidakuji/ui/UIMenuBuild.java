@@ -3,6 +3,7 @@ package dhx.amidakuji.ui;
 import java.util.ArrayList;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input.TextInputListener;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
@@ -10,6 +11,8 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.scenes.scene2d.Event;
+import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
@@ -21,10 +24,11 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField.TextFieldListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.utils.FocusListener.FocusEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
 /**
- * Copyright 2014 Benjamin Lšsch
+ * Copyright 2014 Benjamin Lï¿½sch
  * 
  * This file is part of Amidakuji.
 
@@ -44,7 +48,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
 /**
  * 
- * @author Benjamin Lšsch
+ * @author Benjamin Lï¿½sch
  * @version 0.4
  * 
  */
@@ -57,6 +61,7 @@ public class UIMenuBuild implements Screen {
 	private Skin skin;
 	
 	private ScrollPane scrollPane;
+	private TextButton addline;
 	private TextButton start;
 	private TextButton back;
 	private TextButton clear;
@@ -119,7 +124,7 @@ public class UIMenuBuild implements Screen {
 		// start //
 		stage = new Stage();
 		Gdx.input.setInputProcessor(stage);
-		
+		Gdx.input.setOnscreenKeyboardVisible(true);
 		clearTextFieldTop = true;
 		clearTextFieldBottom = true;
 		
@@ -132,6 +137,7 @@ public class UIMenuBuild implements Screen {
 		startY -= enterTop.getHeight();
 		enterTop.setPosition(30, startY);
 		stage.addActor(enterTop);
+		
 		
 		
 		textTop = new TextField("PLEASE ENTER TEXT HERE", skin);
@@ -162,6 +168,19 @@ public class UIMenuBuild implements Screen {
 					textTop.setText("");
 					clearTextFieldTop = false;
 				}
+				
+				if(!game.keyboardAvailable)
+					Gdx.input.getTextInput(new TextInputListener() {
+						
+						@Override
+						public void input(String text) {
+							textTop.setText(text);
+						}
+						
+						@Override
+						public void canceled() {
+						}
+					}, "Please enter a top-level value", textTop.getText());
 			}
 		});
 		stage.addActor(textTop);
@@ -204,9 +223,36 @@ public class UIMenuBuild implements Screen {
 					textBottom.setText("");
 					clearTextFieldBottom = false;
 				}
+				if(!game.keyboardAvailable)
+					Gdx.input.getTextInput(new TextInputListener() {
+						
+						@Override
+						public void input(String text) {
+							textBottom.setText(text);
+						}
+						
+						@Override
+						public void canceled() {
+						}
+					}, "Please enter a bottom-level value", textBottom.getText());
 			}
 		});
 		stage.addActor(textBottom);
+		
+		if(!game.keyboardAvailable) {
+			addline = new TextButton("ADD LINE", skin);
+			addline.setPosition(Gdx.graphics.getWidth() - 150, Gdx.graphics.getHeight() - 50);
+			addline.addListener(new ClickListener() {
+				
+				@Override
+				public void clicked(InputEvent event, float x, float y) {			
+					
+					onEnterNewEntry();
+					
+				}
+				
+			});
+		}
 		
 		
 		start = new TextButton("START", skin);
@@ -331,6 +377,7 @@ public class UIMenuBuild implements Screen {
 		container.add(scrollPane).expand().fill().colspan(2);	// adding the scrollpane (including sub-table)
 		
 		stage.addActor(container);
+		stage.addActor(addline);
 		stage.addActor(start);
 		stage.addActor(back);
 		stage.addActor(clear);
@@ -379,7 +426,7 @@ public class UIMenuBuild implements Screen {
 
 	@Override
 	public void hide() {
-
+		Gdx.input.setOnscreenKeyboardVisible(false);
 	}
 
 	@Override

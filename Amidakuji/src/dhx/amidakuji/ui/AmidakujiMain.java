@@ -8,7 +8,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 //import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 
 /**
- * Copyright 2014 Benjamin Lšsch
+ * Copyright 2014 Benjamin LÃ¶sch
  * 
  * This file is part of Amidakuji.
 
@@ -28,7 +28,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 /**
  * 
- * @author Benjamin Lšsch
+ * @author Benjamin LÃ¶sch
  * @version 0.4
  * 
  */
@@ -50,18 +50,15 @@ public class AmidakujiMain extends Game {
 	public static BitmapFont bFontPressStart;
 	public static BitmapFont bFontDpCompic;	
 	
-	// size of window
-	public static int width;
-	public static int height;
-	
 	public static final float lineYPadding = 15;
 	public static final float startY = 20;
 	
+	public boolean keyboardAvailable = true;
 
 	public static void drawFrame(SpriteBatch batch, Texture tex) {
-		int count = AmidakujiMain.height/tex.getHeight() + 1;
+		int count = Gdx.graphics.getHeight()/tex.getHeight() + 1;
 		float y = 0;
-		float rightX = AmidakujiMain.width - tex.getWidth();
+		float rightX = Gdx.graphics.getWidth() - tex.getWidth();
 		
 		for(int counter = 0; counter < count; counter++) {
 			batch.draw(tex, 0, y);

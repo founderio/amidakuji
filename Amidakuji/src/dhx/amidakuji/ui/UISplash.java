@@ -7,7 +7,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 /**
- * Copyright 2014 Benjamin Lšsch
+ * Copyright 2014 Benjamin LÃ¶sch
  * 
  * This file is part of Amidakuji.
 
@@ -27,7 +27,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 /**
  * 
- * @author Benjamin Lšsch
+ * @author Benjamin LÃ¶sch
  * @version 0.4
  * 
  */
@@ -52,13 +52,14 @@ public class UISplash implements Screen {
 		batch.begin();
 		AmidakujiMain.drawFrame(batch, AmidakujiMain.tile);
 		AmidakujiMain.bFontDpCompic.draw(batch, "AMIDAKUJI",
-				AmidakujiMain.width/2 - AmidakujiMain.bFontDpCompic.getBounds("AMIDAKUJI").width/2,
-				AmidakujiMain.height/2 + AmidakujiMain.bFontDpCompic.getBounds("AMIDAKUJI").height*2);
+				Gdx.graphics.getWidth()/2 - AmidakujiMain.bFontDpCompic.getBounds("AMIDAKUJI").width/2,
+				Gdx.graphics.getHeight()/2 + AmidakujiMain.bFontDpCompic.getBounds("AMIDAKUJI").height*2);
 		
 		if(System.currentTimeMillis() - lastTime < 500) {
-			AmidakujiMain.bFontPressStart.draw(batch, "PRESS ENTER TO START",
-					AmidakujiMain.width/2 - AmidakujiMain.bFontPressStart.getBounds("PRESS ENTER TO START").width/2,
-					AmidakujiMain.height/2 - AmidakujiMain.bFontPressStart.getBounds("AMIDAKUJI").height);
+			String startText = game.keyboardAvailable ? "PRESS ENTER TO START" : "TAP TO START";
+			AmidakujiMain.bFontPressStart.draw(batch, startText,
+					Gdx.graphics.getWidth()/2 - AmidakujiMain.bFontPressStart.getBounds(startText).width/2,
+					Gdx.graphics.getHeight()/2 - AmidakujiMain.bFontPressStart.getBounds("AMIDAKUJI").height);
 		}
 		if(System.currentTimeMillis() - lastTime > 1000) {
 			lastTime = System.currentTimeMillis();
@@ -74,9 +75,11 @@ public class UISplash implements Screen {
 		AmidakujiMain.bFontPressStart.draw(batch, "COPYRIGHT 2014 BENJAMIN LOESCH", x, y);
 		batch.end();
 		
-		if(Gdx.input.isKeyPressed(Keys.ENTER)) {
+		if((Gdx.input.isKeyPressed(Keys.ENTER) && game.keyboardAvailable) ||
+				(Gdx.input.isTouched() && !game.keyboardAvailable)) {
 			game.setScreen(game.getMenuBuild());
 		}
+		
 	}
 
 	@Override
